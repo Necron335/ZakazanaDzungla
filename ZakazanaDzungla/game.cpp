@@ -117,7 +117,7 @@ namespace MyGame {
                 // Check for collision with enemies
                 for (auto& enem : vectorofenemies) {
                     if (enem == nullptr) {
-                        std::cout << "Im null pointer" << std::endl;
+                        //std::cout << "Im null pointer" << std::endl;
                     }
                     if (enem && entity) { // Check if enem and entity are not nullptr
                         if (entity->getGlobalBounds().intersects(enem->getGlobalBounds())) {
