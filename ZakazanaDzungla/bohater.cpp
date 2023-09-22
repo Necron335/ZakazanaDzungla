@@ -22,10 +22,35 @@ namespace MyGame {
             return std::atan2(dy, dx) * 180 / static_cast<float>(pi);
     }
 
+    void bohater::changeWeapon(int weapon)
+    {
+        if (isDead == false) {
+            switch (weapon)
+            {
+            case(1):
+                teksturabazowa.loadFromFile("textures/PanwKapeluszuRewolwer.png");
+                this->setTexture(teksturabazowa);
+                break;
+            case(2):
+                teksturabazowa.loadFromFile("textures/PanwKapeluszuKusza.png");
+                this->setTexture(teksturabazowa);
+                break;
+            case(3):
+                teksturabazowa.loadFromFile("textures/PanwKapeluszuMlot.png");
+                this->setTexture(teksturabazowa);
+                break;
+            default:
+                break;
+            }
+            
+        }
+    }
+
     void bohater::deductHP(float amount){
         // Deduct health points and handle any additional logic as needed
         hp -= amount;
         if (hp <= 0) {
+            this->isDead = true;
             corpse.loadFromFile("textures/PanwKapeluszuCorpse.png");
             this->setTexture(corpse);
             this->speed = 0;

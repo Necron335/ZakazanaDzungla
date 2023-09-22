@@ -5,22 +5,31 @@
 #include<SFML/Window.hpp>
 #include<SFML/Audio.hpp>
 #include<SFML/Network.hpp>
+
 class entities: public sf::Sprite
 {
 protected:
+	float CalculateRotationAngle(const sf::Vector2f& source, const sf::Vector2f& target);
 	float speed = 0;
 	float rotationAngle = 0;
 	sf::Texture teksturabazowa;
 	sf::Texture corpse;
+	bool isDead = false;
+	float pi = 3.1415;
+	sf::Vector2f bohaterPosition;
+
+
+	void updateBohaterPosition(sf::Vector2f newPosition);
 public:
 	virtual bool isWasp() const { return false; }
+	virtual bool isBullet() const { return false; }
 	virtual void update(float time) {
 
 	}
 	virtual void move(float time) {
 
 	}
-
+	void calla(sf::Vector2f newPosition);
 
 };
 

@@ -18,13 +18,14 @@ namespace MyGame {
         double pi = 3.1415;
         sf::RenderWindow& window;
         float speed = 500;
-        float hp = 20;
+        
         bool canRotate = true;
 
     public:
-        
-
+        bool isDead = false;
+        float hp = 20;
         float CalculateRotationAngle();
+        void changeWeapon(int weapon);
         void deductHP(float amount);
 
         void update(float time);

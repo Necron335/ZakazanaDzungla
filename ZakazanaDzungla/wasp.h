@@ -34,5 +34,5 @@ public:
     void update(float time);
     void move(float time);
 
-    wasp();
+    wasp(float diff);
 };

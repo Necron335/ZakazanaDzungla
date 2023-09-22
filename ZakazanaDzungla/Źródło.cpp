@@ -9,7 +9,7 @@
 #include <ctime>
 
 namespace MyGame {
-    game gameInstance; // Define gameInstance here
+    game gameInstance(1); // Define gameInstance here
 }
 
 int main() {
