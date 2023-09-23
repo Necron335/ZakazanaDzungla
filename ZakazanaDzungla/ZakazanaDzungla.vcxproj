@@ -136,6 +136,7 @@
     <ClCompile Include="background.cpp" />
     <ClCompile Include="bohater.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="charger.cpp" />
     <ClCompile Include="enemies.cpp" />
     <ClCompile Include="entities.cpp" />
     <ClCompile Include="game.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="background.h" />
     <ClInclude Include="bohater.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="charger.h" />
     <ClInclude Include="enemies.h" />
     <ClInclude Include="entities.h" />
     <ClInclude Include="game.h" />

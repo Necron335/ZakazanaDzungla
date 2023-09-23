@@ -11,6 +11,7 @@
 #include "bohater.h"
 #include "game.h"
 #include "wasp.h"
+#include "charger.h"
 #include "background.h"
 #include "bullet.h"
 class bohater;
@@ -68,6 +69,8 @@ namespace MyGame {
         void newRoom();
 
         void spawnWasp(float gameDef);
+
+        void spawnCharger(float gameDef);
 
         void run();
     }

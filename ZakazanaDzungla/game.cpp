@@ -118,7 +118,7 @@ namespace MyGame {
                
                 entity->update(time);
                 entity->calla(bohaterInstance->returnHeroPosition(bohaterInstance));
-                if (entity->isWasp() && bohaterInstance->getGlobalBounds().intersects(entity->getGlobalBounds())) {
+                if ((entity->isWasp()|| entity->isCharger()) && bohaterInstance->getGlobalBounds().intersects(entity->getGlobalBounds())) {
                     if (entity->callIsDead() == false)
                     {
                         bohaterInstance->deductHP(currentgamedifficulty * time);
@@ -128,7 +128,7 @@ namespace MyGame {
                 if (entity->isBullet()) {
                     // Check for collision with enemies
                     for (auto& posenemy : vectorofentities) {
-                        if (posenemy->isWasp()) {
+                        if (posenemy->isWasp()||posenemy->isCharger()) {
                             if (entity->getGlobalBounds().intersects(posenemy->getGlobalBounds())) {
                                 if (posenemy->callIsDead() == false) {
                                     posenemy->takeDamage(1);
@@ -151,6 +151,14 @@ namespace MyGame {
                 waspInstance->updateBohaterPosition(BohaterPosition);
             }
             
+        }
+        for (auto& entity : vectorofentities) {
+            charger* chargerInstance = dynamic_cast<charger*>(entity.get());
+            if (chargerInstance) {
+                //std::cout << "Jestem Wasp"<<BohaterPosition.x<<BohaterPosition.y << std::endl;
+                chargerInstance->updateBohaterPosition(BohaterPosition);
+            }
+
         }
     }
 
@@ -216,10 +224,15 @@ namespace MyGame {
             {case(1):
                 spawnWasp(currentgamedifficulty);
                 numberOfEnemies++;
+                break;
             case(2):
+
                 //spawn shooter
+                break;
             case(3):
-                //spawn charger
+                spawnCharger(currentgamedifficulty);
+                numberOfEnemies++;
+                break;
             //case(4): spawn corpse???
             default:
                 break;
@@ -230,6 +243,12 @@ namespace MyGame {
     void game::spawnWasp(float gameDef) {
         std::unique_ptr<wasp> newWasp = std::make_unique<wasp>(currentgamedifficulty);
         addEntity(std::move(newWasp));
+    }
+
+    void game::spawnCharger(float gameDef)
+    {
+        std::unique_ptr<charger> newCharger = std::make_unique<charger>(currentgamedifficulty);
+        addEntity(std::move(newCharger));
     }
 
     void game::run() {

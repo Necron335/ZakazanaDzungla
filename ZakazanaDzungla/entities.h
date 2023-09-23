@@ -19,10 +19,12 @@ protected:
 	float pi = 3.1415;
 	sf::Vector2f bohaterPosition;
 	int hp = 10;
+	std::vector<sf::Texture> frames;
 
 	void updateBohaterPosition(sf::Vector2f newPosition);
 public:
 	virtual bool isWasp() const { return false; }
+	virtual bool isCharger() const { return false; }
 	virtual bool isBullet() const { return false; }
 	virtual void update(float time) {
 

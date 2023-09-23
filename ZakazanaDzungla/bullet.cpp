@@ -23,7 +23,7 @@ bullet::bullet(){
 
     teksturabazowa.loadFromFile("textures/Bullet.png");
     this->setTexture(teksturabazowa);
-    this->speed = 800;
+    this->speed = 1000;
     
 }
 
