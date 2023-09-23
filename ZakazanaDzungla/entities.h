@@ -15,6 +15,7 @@ protected:
 	sf::Texture teksturabazowa;
 	sf::Texture corpse;
 	bool isDead = false;
+	bool isActive = true;
 	float pi = 3.1415;
 	sf::Vector2f bohaterPosition;
 	int hp = 10;
@@ -30,6 +31,7 @@ public:
 
 	}
 	virtual bool callIsDead() { return false; };
+	virtual bool callIsActive() { return isActive; };
 	virtual void takeDamage(int damage) {}
 	virtual void handleCollisionWithEnemy() {}
 	void calla(sf::Vector2f newPosition);

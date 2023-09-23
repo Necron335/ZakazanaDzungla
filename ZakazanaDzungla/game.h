@@ -24,7 +24,7 @@ namespace MyGame {
         float gamedifficulty = 1;
         int currentRoom = 1;
         float currentgamedifficulty = 1;
-        int numberofenemies =0;
+
         int currentweapon = 1;
         float healthofhero = 20;
         float score = 0;
@@ -35,7 +35,8 @@ namespace MyGame {
         sf::Text texthp;
         sf::Text textcroom;
         sf::Text textscore;
-
+        int numberOfEnemies = 0;
+        int numberOfEnemiesfixed = 0;
         sf::Texture backgroundTexture;
         sf::Sprite backgroundSprite;
         bohater* findBohater();

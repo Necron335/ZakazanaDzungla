@@ -109,26 +109,40 @@ namespace MyGame {
         }
         
         //std::cout << BohaterPosition.x << BohaterPosition.y << std::endl;
-        
+        numberOfEnemiesfixed = numberOfEnemies;
         for (auto& entity : vectorofentities) {
-            entity->update(time);
-            entity->calla(bohaterInstance->returnHeroPosition(bohaterInstance));
-            if (entity->isWasp() && bohaterInstance->getGlobalBounds().intersects(entity->getGlobalBounds())) {
-                bohaterInstance->deductHP(currentgamedifficulty*time);
+            if (entity->callIsDead() == true) {
+                numberOfEnemiesfixed--;
             }
-            if (entity->isBullet()) {
-                // Check for collision with enemies
-                for (auto& posenemy : vectorofentities) {
-                    if (posenemy->isWasp()) {
-                        if (entity->getGlobalBounds().intersects(posenemy->getGlobalBounds())) {
-                            if (posenemy->callIsDead() == false) {
-                                posenemy->takeDamage(1);
-                                entity->handleCollisionWithEnemy();
+            if (entity->callIsActive() == true) {
+               
+                entity->update(time);
+                entity->calla(bohaterInstance->returnHeroPosition(bohaterInstance));
+                if (entity->isWasp() && bohaterInstance->getGlobalBounds().intersects(entity->getGlobalBounds())) {
+                    if (entity->callIsDead() == false)
+                    {
+                        bohaterInstance->deductHP(currentgamedifficulty * time);
+                    }
+
+                }
+                if (entity->isBullet()) {
+                    // Check for collision with enemies
+                    for (auto& posenemy : vectorofentities) {
+                        if (posenemy->isWasp()) {
+                            if (entity->getGlobalBounds().intersects(posenemy->getGlobalBounds())) {
+                                if (posenemy->callIsDead() == false) {
+                                    posenemy->takeDamage(1);
+                                    entity->handleCollisionWithEnemy();
+                                }
                             }
                         }
                     }
                 }
             }
+        }
+        if (numberOfEnemiesfixed <= 0) {
+            newRoom();
+
         }
         for (auto& entity : vectorofentities) {
             wasp* waspInstance = dynamic_cast<wasp*>(entity.get());
@@ -176,8 +190,7 @@ namespace MyGame {
             texthp.setString("Health Points: 0");
         }
         textcroom.setString("Current room: "+std::to_string(currentRoom-1));
-        textscore.setString("Current score: " + std::to_string(score));
-        textscore.setString("Current score: "+std::to_string(static_cast<int>(score)));
+        textscore.setString("Enemies: "+std::to_string(numberOfEnemiesfixed));
         window.draw(texthp);
         window.draw(textcroom);
         window.draw(textscore);
@@ -195,14 +208,14 @@ namespace MyGame {
         int numEnemies = std::rand() % static_cast<int>(10 * currentgamedifficulty) + 1;
         //std::cout << numEnemies;
         for (int i = 0; i < numEnemies; ++i) {
-            numberofenemies++;
+            
             // Create and add the enemy to the game
             int randomnum = std::rand() % 3 + 1;
             //std::cout << randomnum;
             switch (randomnum)
             {case(1):
                 spawnWasp(currentgamedifficulty);
-                numberofenemies++;
+                numberOfEnemies++;
             case(2):
                 //spawn shooter
             case(3):
@@ -217,7 +230,6 @@ namespace MyGame {
     void game::spawnWasp(float gameDef) {
         std::unique_ptr<wasp> newWasp = std::make_unique<wasp>(currentgamedifficulty);
         addEntity(std::move(newWasp));
-        addEnemy(std::move(newWasp));
     }
 
     void game::run() {

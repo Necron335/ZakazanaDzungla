@@ -30,6 +30,7 @@ void wasp::update(float time){
         this->setTexture(corpse);
         speed = 0;
         isDead = true;
+        isActive = false;
     }
     
 }
