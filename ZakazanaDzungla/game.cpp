@@ -7,6 +7,7 @@ namespace MyGame {
         addEntity(std::move(bohaterInstance));
         initializeData(difficulty);
         initializeText();
+        shootTim.restart();
         
     }
     bohater* game::findBohater() {
@@ -75,21 +76,23 @@ namespace MyGame {
             currentweapon = 3;
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            // Get the mouse click position
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            if(shootTim.getElapsedTime().asSeconds() >= 0.2) {
+                shootTim.restart();
+                // Get the mouse click position
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-            // Calculate the direction from the bohater to the mouse click
-            sf::Vector2f bohaterPosition = bohaterInstance->returnHeroPosition(bohaterInstance);
-            sf::Vector2f direction = static_cast<sf::Vector2f>(mousePosition) - bohaterPosition;
-           
+                // Calculate the direction from the bohater to the mouse click
+                sf::Vector2f bohaterPosition = bohaterInstance->returnHeroPosition(bohaterInstance);
+                sf::Vector2f direction = static_cast<sf::Vector2f>(mousePosition) - bohaterPosition;
 
-            // Create and add a Bullet to the game
 
-            std::unique_ptr<bullet> newbullet = std::make_unique<bullet>();
-            newbullet->setPosition(bohaterInstance->returnHeroPosition(bohaterInstance));
-            newbullet->setRotation(bohaterInstance->getRotation());
-            addEntity(std::move(newbullet));
+                // Create and add a Bullet to the game
 
+                std::unique_ptr<bullet> newbullet = std::make_unique<bullet>();
+                newbullet->setPosition(bohaterInstance->returnHeroPosition(bohaterInstance));
+                newbullet->setRotation(bohaterInstance->getRotation());
+                addEntity(std::move(newbullet));
+            }
         }
     }
 
@@ -115,17 +118,13 @@ namespace MyGame {
             }
             if (entity->isBullet()) {
                 // Check for collision with enemies
-                for (auto& enem : vectorofenemies) {
-                    if (enem == nullptr) {
-                        //std::cout << "Im null pointer" << std::endl;
-                    }
-                    if (enem && entity) { // Check if enem and entity are not nullptr
-                        if (entity->getGlobalBounds().intersects(enem->getGlobalBounds())) {
-                            // Handle collision with the enemy
-                            enem->takeDamage(1);
-                            std::cout << "Collision detected with wasp enemy!" << std::endl;
-                            std::cout << "Bullet Position: (" << entity->getPosition().x << ", " << entity->getPosition().y << ")" << std::endl;
-                            std::cout << "Wasp Position: (" << enem->getPosition().x << ", " << enem->getPosition().y << ")" << std::endl;
+                for (auto& posenemy : vectorofentities) {
+                    if (posenemy->isWasp()) {
+                        if (entity->getGlobalBounds().intersects(posenemy->getGlobalBounds())) {
+                            if (posenemy->callIsDead() == false) {
+                                posenemy->takeDamage(1);
+                                entity->handleCollisionWithEnemy();
+                            }
                         }
                     }
                 }

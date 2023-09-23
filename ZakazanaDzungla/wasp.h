@@ -21,15 +21,17 @@ private:
     float pi = 3.1415;
     float speed = 200;
     float rotationAngle = 0;
-    float hp = 5;
+    
     sf::Texture teksturabazowa;
 
     float CalculateRotationAngle(const sf::Vector2f& source, const sf::Vector2f& target);
 
 public:
+    bool callIsDead();
+    float hp = 5;
     bool isWasp() const override { return true; }
     sf::Vector2f bohaterPosition;
-
+    void takeDamage(int damage);
     void updateBohaterPosition(sf::Vector2f newPosition);
     void update(float time);
     void move(float time);

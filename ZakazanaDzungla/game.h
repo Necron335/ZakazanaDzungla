@@ -28,6 +28,7 @@ namespace MyGame {
         int currentweapon = 1;
         float healthofhero = 20;
         float score = 0;
+        sf::Clock shootTim;
 
     public:
         background back;

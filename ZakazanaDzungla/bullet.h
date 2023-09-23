@@ -18,7 +18,7 @@ public:
     void move(float time);
     void update(float time);
     bullet();
-    void handleCollisionWithEnemy(enemies& enemy);
+    void handleCollisionWithEnemy();
 
 ;};
 

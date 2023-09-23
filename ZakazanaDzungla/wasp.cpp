@@ -10,6 +10,11 @@ float wasp::CalculateRotationAngle(const sf::Vector2f& source, const sf::Vector2
     return std::atan2(dy, dx) * 180 / static_cast<float>(pi);
 }
 
+bool wasp::callIsDead()
+{
+    return isDead;
+}
+
 void wasp::updateBohaterPosition(sf::Vector2f newPosition) {
     bohaterPosition = newPosition;
     //wstd::cout << bohaterPosition.x << bohaterPosition.y;
@@ -22,10 +27,16 @@ void wasp::update(float time){
     MyGame::bohater* bohater = MyGame::gameInstance.bohaterInstance.get();
     if (hp<=0) {
         corpse.loadFromFile("textures/Corpse.png");
+        this->setTexture(corpse);
         speed = 0;
         isDead = true;
     }
     
+}
+
+void wasp::takeDamage(int damage)
+{
+    hp -= damage;
 }
 
 void wasp::move(float time) {

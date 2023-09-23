@@ -23,12 +23,12 @@ bullet::bullet(){
 
     teksturabazowa.loadFromFile("textures/Bullet.png");
     this->setTexture(teksturabazowa);
-
+    this->speed = 800;
     
 }
 
-void bullet::handleCollisionWithEnemy(enemies& enemy)
+void bullet::handleCollisionWithEnemy()
 {// Deal damage to the enemy and destroy the bullet
-    enemy.calltk(damage);
-    delete this;
+    this->speed = 0;
+    this->setPosition(10000,10000);
 }

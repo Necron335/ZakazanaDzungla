@@ -17,7 +17,7 @@ protected:
 	bool isDead = false;
 	float pi = 3.1415;
 	sf::Vector2f bohaterPosition;
-
+	int hp = 10;
 
 	void updateBohaterPosition(sf::Vector2f newPosition);
 public:
@@ -29,6 +29,9 @@ public:
 	virtual void move(float time) {
 
 	}
+	virtual bool callIsDead() { return false; };
+	virtual void takeDamage(int damage) {}
+	virtual void handleCollisionWithEnemy() {}
 	void calla(sf::Vector2f newPosition);
 
 };

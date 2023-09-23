@@ -9,7 +9,7 @@ public:
 	virtual void move() {
 
 	}
-	void takeDamage(int damage);
+	virtual void takeDamage(int damage) {};
 	void calltk(int damage);
 };
 
