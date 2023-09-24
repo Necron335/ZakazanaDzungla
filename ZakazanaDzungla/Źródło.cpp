@@ -9,7 +9,7 @@
 #include <ctime>
 
 namespace MyGame {
-    game gameInstance(1); // Define gameInstance here
+    game gameInstance(1); // Wpisz poziom trudnosci
 }
 
 int main() {

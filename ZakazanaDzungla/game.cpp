@@ -183,7 +183,7 @@ namespace MyGame {
                         if (posenemy->isWasp()||posenemy->isCharger()||posenemy->isShooter()) {
                             if (entity->getGlobalBounds().intersects(posenemy->getGlobalBounds())) {
                                 if (posenemy->callIsDead() == false) {
-                                    posenemy->takeDamage(1);
+                                    posenemy->takeDamage(5);
                                     entity->handleCollisionWithEnemy();
                                 }
                             }
