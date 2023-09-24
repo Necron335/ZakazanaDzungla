@@ -1,6 +1,5 @@
-#include "bullet.h"
-
-void bullet::move(float time)
+#include "swing.h"
+void swing::move(float time)
 {
     // Implement your move logic here
     float angleRadians = (this->getRotation() - 90) * pi / 180.0f;
@@ -14,24 +13,31 @@ void bullet::move(float time)
     this->setPosition(this->getPosition() + movement * time);
 }
 
-void bullet::update(float time)
+void swing::update(float time)
 {
     if (alivetime.getElapsedTime().asSeconds() >= timetodie) {
         handleCollisionWithEnemy();
     }
 }
 
-bullet::bullet(){
-
-    teksturabazowa.loadFromFile("textures/Bullet.png");
+swing::swing() {
+    timetodie = 0.15;
+    teksturabazowa.loadFromFile("textures/swing.png");
     this->setTexture(teksturabazowa);
-    this->speed = 1000;
-    
+    this->speed = 1500;
+    alivetime.restart();
+
 }
 
-void bullet::handleCollisionWithEnemy()
+void swing::handleCollisionWithEnemy()
 {// Deal damage to the enemy and destroy the bullet
-    this->speed = 0;
-    this->setPosition(10000,10000);
-    this->isActive = false;
+    if (alivetime.getElapsedTime().asSeconds() <= timetodie) {
+
+    }
+    else {
+        this->speed = 0;
+        this->setPosition(10000, 10000);
+        this->isActive = false;
+    }
+
 }

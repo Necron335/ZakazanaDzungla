@@ -4,6 +4,7 @@ class enemies :   public entities
 {
 protected:
 	float hp = 10;
+	//Damage is redundant here but hey, it looks cool
 	float damage = 1;
 public:
 	virtual void move() {

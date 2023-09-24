@@ -5,6 +5,7 @@
 
 float entities::CalculateRotationAngle(const sf::Vector2f& source, const sf::Vector2f& target)
 {
+    //very useful function, allows most of operations here, lovely thing
     float dx = target.x - source.x;
     float dy = target.y - source.y;
     return std::atan2(dy, dx) * 180 / static_cast<float>(pi);

@@ -98,7 +98,7 @@ namespace MyGame {
         sf::Vector2f objectSize = static_cast<sf::Vector2f>(teksturabazowa.getSize());
 
         float initialX = windowSize.x / 2.0f;
-        float initialY = windowSize.y - objectSize.y / 2.0f;
+        float initialY = windowSize.y / 2.0f;
 
         setPosition(initialX, initialY);
     }

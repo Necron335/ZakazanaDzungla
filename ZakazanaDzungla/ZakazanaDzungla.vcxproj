@@ -135,33 +135,35 @@
   <ItemGroup>
     <ClCompile Include="background.cpp" />
     <ClCompile Include="bohater.cpp" />
+    <ClCompile Include="bolt.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="charger.cpp" />
     <ClCompile Include="enemies.cpp" />
     <ClCompile Include="entities.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameGlobals.cpp" />
-    <ClCompile Include="particles.cpp" />
-    <ClCompile Include="pickups.cpp" />
     <ClCompile Include="projectiles.cpp" />
+    <ClCompile Include="shooter.cpp" />
+    <ClCompile Include="stinger.cpp" />
+    <ClCompile Include="swing.cpp" />
     <ClCompile Include="wasp.cpp" />
-    <ClCompile Include="weapons.cpp" />
     <ClCompile Include="Źródło.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="background.h" />
     <ClInclude Include="bohater.h" />
+    <ClInclude Include="bolt.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="charger.h" />
     <ClInclude Include="enemies.h" />
     <ClInclude Include="entities.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameGlobals.h" />
-    <ClInclude Include="particles.h" />
-    <ClInclude Include="pickups.h" />
     <ClInclude Include="projectiles.h" />
+    <ClInclude Include="shooter.h" />
+    <ClInclude Include="stinger.h" />
+    <ClInclude Include="swing.h" />
     <ClInclude Include="wasp.h" />
-    <ClInclude Include="weapons.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

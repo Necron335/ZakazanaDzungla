@@ -1,6 +1,6 @@
-#include "bullet.h"
+#include "bolt.h"
 
-void bullet::move(float time)
+void bolt::move(float time)
 {
     // Implement your move logic here
     float angleRadians = (this->getRotation() - 90) * pi / 180.0f;
@@ -14,24 +14,31 @@ void bullet::move(float time)
     this->setPosition(this->getPosition() + movement * time);
 }
 
-void bullet::update(float time)
+void bolt::update(float time)
 {
     if (alivetime.getElapsedTime().asSeconds() >= timetodie) {
         handleCollisionWithEnemy();
     }
 }
 
-bullet::bullet(){
+bolt::bolt() {
 
-    teksturabazowa.loadFromFile("textures/Bullet.png");
+    teksturabazowa.loadFromFile("textures/bolt.png");
     this->setTexture(teksturabazowa);
     this->speed = 1000;
-    
+    alivetime.restart();
+
 }
 
-void bullet::handleCollisionWithEnemy()
+void bolt::handleCollisionWithEnemy()
 {// Deal damage to the enemy and destroy the bullet
-    this->speed = 0;
-    this->setPosition(10000,10000);
-    this->isActive = false;
+    if (alivetime.getElapsedTime().asSeconds() <= timetodie) {
+        
+    }
+    else {
+        this->speed = 0;
+        this->setPosition(10000, 10000);
+        this->isActive = false;
+    }
+    
 }

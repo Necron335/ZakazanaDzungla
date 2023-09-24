@@ -1,8 +1,8 @@
-#include "bullet.h"
+#include "stinger.h"
 
-void bullet::move(float time)
+void stinger::move(float time)
 {
-    // Implement your move logic here
+    //Rotation Schenenigans
     float angleRadians = (this->getRotation() - 90) * pi / 180.0f;
 
     // Calculate the movement vector based on the angle
@@ -14,24 +14,27 @@ void bullet::move(float time)
     this->setPosition(this->getPosition() + movement * time);
 }
 
-void bullet::update(float time)
+void stinger::update(float time)
 {
+    //remnant after bullet, it was supposed to work just the same, but conditions in game would be different but alas its not working
     if (alivetime.getElapsedTime().asSeconds() >= timetodie) {
         handleCollisionWithEnemy();
     }
 }
 
-bullet::bullet(){
+stinger::stinger(sf::Vector2f startpos, float direction) {
 
-    teksturabazowa.loadFromFile("textures/Bullet.png");
+    teksturabazowa.loadFromFile("textures/Stinger.png");
     this->setTexture(teksturabazowa);
     this->speed = 1000;
-    
+    this->setPosition(startpos);
+    this->setRotation(direction);
+
 }
 
-void bullet::handleCollisionWithEnemy()
-{// Deal damage to the enemy and destroy the bullet
+void stinger::handleCollisionWithEnemy()
+{// Deal damage to the hero and destroy the stinger, make it disabled~
     this->speed = 0;
-    this->setPosition(10000,10000);
+    this->setPosition(10000, 10000);
     this->isActive = false;
 }

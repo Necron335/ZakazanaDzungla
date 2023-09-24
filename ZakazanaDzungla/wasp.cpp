@@ -53,12 +53,12 @@ void wasp::move(float time) {
 
 wasp::wasp(float diff) {
     this->hp = this->hp * diff;
-    this->speed = this->speed * diff*0.5;
+    speed = speed * diff*0.5;
     // Generate a random speed multiplier between 0.8 and 1.2
     float speedMultiplier = 0.8f + static_cast<float>(std::rand()) / (static_cast<float>(RAND_MAX / (1.2f - 0.8f)));
 
     // Apply the multiplier to the basic speed
-    speed *= speedMultiplier;
+    speed *= speedMultiplier * diff;
     //if (!teksturabazowa.loadFromFile("textures/wasp.png")) {
     //    // Handle error loading texture
     //}
@@ -75,10 +75,38 @@ wasp::wasp(float diff) {
     teksturabazowa.loadFromFile("textures/wasp.png");
     this->setTexture(teksturabazowa);
     // Generate a random x-coordinate at the top of the screen
-    float randomX = static_cast<float>(std::rand() % 1920); // Assuming a screen width of 1920 pixels
+   // Assuming a screen width of 1920 pixels and a screen height of 1080 pixels
+    int screenWidth = 1920;
+    int screenHeight = 1080;
 
-    // Set the initial position with the random x-coordinate and a fixed y-coordinate (at the top)
-    this->setPosition(randomX, 100); // 0 is the top of the screen
+    // Randomly choose the spawn side (0: top, 1: right, 2: bottom, 3: left)
+    int spawnSide = std::rand() % 4;
+
+    float randomX, randomY;
+
+    switch (spawnSide) {
+    case 0: // Spawn on top
+        randomX = static_cast<float>(std::rand() % screenWidth);
+        randomY = -100.0f;
+        break;
+    case 1: // Spawn on the right
+        randomX = screenWidth + 100.0f;
+        randomY = static_cast<float>(std::rand() % screenHeight);
+        break;
+    case 2: // Spawn on the bottom
+        randomX = static_cast<float>(std::rand() % screenWidth);
+        randomY = screenHeight + 100.0f;
+        break;
+    case 3: // Spawn on the left
+        randomX = -100.0f;
+        randomY = static_cast<float>(std::rand() % screenHeight);
+        break;
+    default:
+        // Handle unexpected case (this should never happen)
+        break;
+    }
+
+    this->setPosition(randomX, randomY);
     sf::Vector2f size = static_cast<sf::Vector2f>(teksturabazowa.getSize());
     setOrigin(size.x / 2, size.y / 2);
 }
