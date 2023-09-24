@@ -10,6 +10,9 @@
 
 namespace MyGame {
     game gameInstance(1); // Wpisz poziom trudnosci
+    // W aby poruszac sie do prodzu
+    //myszka to cel pozycji gracza
+    // Aby wybrac bron nalezy nacisnac 1 2 lub 3 dla roznych broni
 }
 
 int main() {
